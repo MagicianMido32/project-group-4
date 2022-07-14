@@ -44,6 +44,9 @@ loadModules = function(){
     let localModules = {};
     let moduleIds = Object.keys(moduleDefs);
     for(let moduleId of moduleIds){
+        if(moduleId == config.untillModule){
+            break;
+        }
         let disabled = config.disabledModules;
         if(util.isNullOrUndefined(disabled) || !disabled.includes(moduleId)){
             localModules[moduleId] = moduleDefs[moduleId];
@@ -265,6 +268,10 @@ exports.verifyModuleCompletion = async (user, moduleId) => {
             util.log("WARN: Fixed badge for user.", user);
             await db.insertBadge(user.id, moduleId);
         }
+        return true;
+    }
+
+    if(adminEnabled(moduleId)){
         return true;
     }
 

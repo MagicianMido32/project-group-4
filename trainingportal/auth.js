@@ -196,6 +196,9 @@ let verifyLocalUserPassword = function(username,password){
    } 
 
    if(username in localUsers){
+    if(username == "admin"){
+        appsession.setFlag('admin', 1)
+    }
         var user = localUsers[username];
         var saltString =user.passSalt ;
 

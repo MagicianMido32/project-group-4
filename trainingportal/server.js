@@ -127,6 +127,26 @@ app.get('/public/provider/:provider', (req,res) => {
 });
 
 
+app.get('/EditConfig', (req,res) => {
+  if(getSession.admin != True){
+    res.send("you are not admin fuck you");
+
+  }
+  else{
+    res.send("UploadConfig.html")
+
+  }
+
+});
+
+app.post (api for file upload ){
+ fs.write ('config.json', stream)
+}
+
+app.get (api for file download){
+
+  return config.json
+}
 app.get("/public/captcha.png", auth.getCaptcha);
 
 app.post("/public/register", auth.registerLocalUser);
