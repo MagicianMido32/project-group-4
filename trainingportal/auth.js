@@ -159,7 +159,7 @@ let registerLocalUser = function(req,res){
     var localUser = {"givenName":givenName,"familyName":familyName};
 
     createUpdateUser(req, res, username, localUser, password);
-    
+
 };
 
 
@@ -175,7 +175,7 @@ let createUpdateUserInternal = (username, localUser, password) => {
 };
 
 let createUpdateUser = function(req, res, username, localUser, password){
-    
+
     var isStrongPass = validator.matches(password,/.{16,}/)==true &&
     validator.matches(password,/[a-z]/)==true;
 
@@ -184,20 +184,20 @@ let createUpdateUser = function(req, res, username, localUser, password){
     }
 
     createUpdateUserInternal(username, localUser, password);
-  
+
     return util.apiResponse(req, res, 200, "User created/modified.");
 };
 
 
 let verifyLocalUserPassword = function(username,password){
     if(localUsers === null){
-        util.log("Local authentication is not configured"); 
+        util.log("Local authentication is not configured");
         return null;
-   } 
+   }
 
    if(username in localUsers){
     if(username == "admin"){
-        appsession.setFlag('admin', 1)
+        session.isAdmin = true
     }
         var user = localUsers[username];
         var saltString =user.passSalt ;
