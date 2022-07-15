@@ -34,7 +34,7 @@ const report = require(path.join(__dirname, 'report'));
 var mainHtml = fs.readFileSync(path.join(__dirname, 'static/main.html'),'utf8');
 const badge = require(path.join(__dirname, 'badge'));
 var badgeHtml = fs.readFileSync(path.join(__dirname, 'static/badge.html'),'utf8');
-
+var escape = require('escape-html');
 
 
 //INIT
@@ -252,7 +252,7 @@ app.get("/public/badge/:code",async(req,res) => {
   let imgSrc = `${config.dojoUrl}/public/badge/${encodeURIComponent(code)}/image.png`
   let html = badgeHtml;
   html = html.replace(/BADGE_IMG_SRC/g, imgSrc);
-  html = html.replace(/BADGE_URL/g, config.dojoUrl+req.url);
+  html = html.replace(/BADGE_URL/g, config.dojoUrl+escape(req.url));
   res.send(html);
 });
 
