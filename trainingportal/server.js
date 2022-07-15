@@ -77,6 +77,44 @@ app.use(fileUpload({
   safeFileNames: true
 }));
 
+app.get("/editConfig", auth.authMiddleWare, (req,res) => {
+    res.redirect('/public/edit_cgf.html');
+});
+
+app.post("/editConfig/upload", function (req, res) {
+
+  // When a file has been uploaded
+  if (req.files && Object.keys(req.files).length !== 0) {
+
+    // Uploaded path
+    const uploadedFile = req.files.uploadFile;
+
+    // Logging uploading file
+    console.log(uploadedFile);
+
+    // Upload path
+    const uploadPath = __dirname
+        + "/uploads/" + uploadedFile.name;
+
+    // To save the file using mv() function
+    uploadedFile.mv(uploadPath, function (err) {
+      if (err) {
+        console.log(err);
+        res.send("Failed !!");
+      } else res.send("Successfully Uploaded !!");
+    });
+  } else res.send("No file uploaded !!");
+});
+
+app.get("/editConfig/download", function (req, res) {
+
+  // The res.download() talking file path to be downloaded
+  res.download(__dirname + "/config.json", function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+});
 
 //ROUTES
 
@@ -139,14 +177,7 @@ app.get('/EditConfig', (req,res) => {
 
 });
 
-app.post (api for file upload ){
- fs.write ('config.json', stream)
-}
 
-app.get (api for file download){
-
-  return config.json
-}
 app.get("/public/captcha.png", auth.getCaptcha);
 
 app.post("/public/register", auth.registerLocalUser);

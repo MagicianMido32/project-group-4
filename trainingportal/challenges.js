@@ -44,7 +44,7 @@ loadModules = function(){
     let localModules = {};
     let moduleIds = Object.keys(moduleDefs);
     for(let moduleId of moduleIds){
-        if(moduleId == config.untillModule){
+        if(moduleId == config.untilModule){
             break;
         }
         let disabled = config.disabledModules;
