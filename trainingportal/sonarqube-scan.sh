@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
-source ./key
+
 
 ### sonarqube script #####
 
-docker run --rm --network="host" -e SONAR_HOST_URL="http://localhost:9000/" -e SONAR_LOGIN=$SONAR_LOGIN -v "`pwd`:/usr/src" sonarsource/sonar-scanner-cli -Dsonar.projectKey=$projectKey
+docker run --rm --network="host" -e SONAR_HOST_URL="http://localhost:9000/" -e SONAR_LOGIN=dojo -v "`pwd`:/usr/src" sonarsource/sonar-scanner-cli -Dsonar.projectKey=sqp_4c9e578c405087bf1ea5740ce208762231851e9f
