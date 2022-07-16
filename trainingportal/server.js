@@ -34,7 +34,7 @@ const report = require(path.join(__dirname, 'report'));
 var mainHtml = fs.readFileSync(path.join(__dirname, 'static/main.html'),'utf8');
 const badge = require(path.join(__dirname, 'badge'));
 var badgeHtml = fs.readFileSync(path.join(__dirname, 'static/badge.html'),'utf8');
-
+var escape = require('escape-html');
 
 
 //INIT
@@ -77,6 +77,44 @@ app.use(fileUpload({
   safeFileNames: true
 }));
 
+app.get("/editConfig", auth.authMiddleWare, (req,res) => {
+    res.redirect('/public/edit_cgf.html');
+});
+
+app.post("/editConfig/upload", function (req, res) {
+
+  // When a file has been uploaded
+  if (req.files && Object.keys(req.files).length !== 0) {
+
+    // Uploaded path
+    const uploadedFile = req.files.uploadFile;
+
+    // Logging uploading file
+    console.log(uploadedFile);
+
+    // Upload path
+    const uploadPath = __dirname
+        + "/uploads/" + uploadedFile.name;
+
+    // To save the file using mv() function
+    uploadedFile.mv(uploadPath, function (err) {
+      if (err) {
+        console.log(err);
+        res.send("Failed !!");
+      } else res.send("Successfully Uploaded !!");
+    });
+  } else res.send("No file uploaded !!");
+});
+
+app.get("/editConfig/download", function (req, res) {
+
+  // The res.download() talking file path to be downloaded
+  res.download(__dirname + "/config.json", function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+});
 
 //ROUTES
 
@@ -86,7 +124,7 @@ app.get("/",(req,res) => {
 
 app.get('/favicon.ico', (req, res) => {
   res.status(204).send();
-}); 
+});
 
 
 app.get("/public/privacy",(req,res) => {
@@ -139,14 +177,7 @@ app.get('/EditConfig', (req,res) => {
 
 });
 
-app.post (api for file upload ){
- fs.write ('config.json', stream)
-}
 
-app.get (api for file download){
-
-  return config.json
-}
 app.get("/public/captcha.png", auth.getCaptcha);
 
 app.post("/public/register", auth.registerLocalUser);
@@ -221,7 +252,7 @@ app.get("/public/badge/:code",async(req,res) => {
   let imgSrc = `${config.dojoUrl}/public/badge/${encodeURIComponent(code)}/image.png`
   let html = badgeHtml;
   html = html.replace(/BADGE_IMG_SRC/g, imgSrc);
-  html = html.replace(/BADGE_URL/g, config.dojoUrl+req.url);
+  html = html.replace(/BADGE_URL/g, config.dojoUrl+escape(req.url));
   res.send(html);
 });
 

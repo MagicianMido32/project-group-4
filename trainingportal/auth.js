@@ -588,6 +588,13 @@ let addSecurityHeaders = function (req, res, next) {
     next();
 }
 
+let authMiddleWare = function(req, res, next) {
+  if (req.session.isAdmin)
+    return next();
+  else
+    return res.sendStatus(401);
+};
+
 module.exports = {
     addCsrfToken,
     addSecurityHeaders,
@@ -602,5 +609,6 @@ module.exports = {
     logoutAndKillSession,
     processAuthCallback,
     registerLocalUser,
-    updateLocalUser
+    updateLocalUser,
+    authMiddleWare
 }

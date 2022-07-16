@@ -1,12 +1,12 @@
-var crypto = require('crypto');
-var util = require('util');
+const crypto = require('crypto');
+const util = require('util');
 
 function getEncParams(keySeed,ivSeed){
-    var myKeySeed = keySeed;
-    var myIvSeed = ivSeed;
+    let myKeySeed = keySeed;
+    let myIvSeed = ivSeed;
     if(util.isNullOrUndefined(myKeySeed) || util.isNullOrUndefined(myIvSeed)){
-       var myKeySeed = process.env.ENC_KEY;
-       var myIvSeed = process.env.ENC_KEY_IV;
+        myKeySeed = process.env.ENC_KEY;
+        myIvSeed = process.env.ENC_KEY_IV;
     }
     var cryptkey = crypto.createHash('sha256').update(myKeySeed).digest();
     var iv = crypto.createHash('sha256').update(myIvSeed).digest().slice(0,16);
