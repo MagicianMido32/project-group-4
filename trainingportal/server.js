@@ -165,17 +165,7 @@ app.get('/public/provider/:provider', (req,res) => {
 });
 
 
-app.get('/EditConfig', (req,res) => {
-  if(getSession.admin != True){
-    res.send("you are not admin fuck you");
 
-  }
-  else{
-    res.send("UploadConfig.html")
-
-  }
-
-});
 
 
 app.get("/public/captcha.png", auth.getCaptcha);
