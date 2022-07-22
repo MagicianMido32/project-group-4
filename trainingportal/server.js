@@ -108,7 +108,11 @@ if (req.files && Object.keys(req.files).length !== 0) {
     if (err) {
       console.log(err);
       res.send("Failed !!");
-    } else res.send("Successfully Uploaded !!");
+    } else {
+      delete require.cache[require.resolve('./config.json')]   // Deleting loaded module
+      config = require("./config.json");
+      res.send("Successfully Uploaded !!");
+    } 
 
   });
 

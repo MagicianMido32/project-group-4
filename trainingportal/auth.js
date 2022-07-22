@@ -560,10 +560,7 @@ let ensureApiAuth = function (req, res, next) {
 
 //logs the user out and kills the session
 let logoutAndKillSession = function (req, res, redirect){
-    req.logout(function(err) {
-        if (err) { return next(err); }
-        res.redirect('/');
-      });
+    req.logout();
     req.session.destroy(() => {
         res.redirect(redirect);
     }); 

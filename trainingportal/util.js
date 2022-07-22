@@ -13,6 +13,9 @@ exports.getDataDir = () => {
 }
 
 exports.getConfig = () => {
+  // Deleting loaded module
+  delete require.cache[require.resolve('./config.json')]   // Deleting loaded module
+  config = require("./config.json");
   if(!config){
     let dataDir = exports.getDataDir();
     let configPath = path.join(dataDir, 'config.json');
