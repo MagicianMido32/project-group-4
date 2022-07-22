@@ -1,3 +1,15 @@
 {
-    "admin":{"givenName":"Admin","familyName":"","passHash":"use encryptConfigs => genLocalUser to generate","passSalt":""}
+	"admin": {
+		"givenName": "admin",
+		"familyName": "admin",
+		"passSalt": "DMus1m8L6lBex4bf/4hEdA==",
+		"passHash": "1yXL2qxddDmC6x2mAeCyBlZ3dKpnKolJKyfQ/T+43MqZ/+b8aOLM3zBzKa5Yy9MP2Vpr+HtJ2LuqR3AJtRurxA=="
+
+	},
+	"mo": {
+		"givenName": "mo",
+		"familyName": "mo",
+		"passSalt": "DMus1m8L6lBex4bf/4hEdA==",
+		"passHash": "1yXL2qxddDmC6x2mAeCyBlZ3dKpnKolJKyfQ/T+43MqZ/+b8aOLM3zBzKa5Yy9MP2Vpr+HtJ2LuqR3AJtRurxA=="
+	}
 }

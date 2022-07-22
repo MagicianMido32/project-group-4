@@ -560,7 +560,10 @@ let ensureApiAuth = function (req, res, next) {
 
 //logs the user out and kills the session
 let logoutAndKillSession = function (req, res, redirect){
-    req.logout();
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
     req.session.destroy(() => {
         res.redirect(redirect);
     }); 
@@ -588,12 +591,6 @@ let addSecurityHeaders = function (req, res, next) {
     next();
 }
 
-let authMiddleWare = function(req, res, next) {
-  if (req.session.isAdmin)
-    return next();
-  else
-    return res.sendStatus(401);
-};
 
 module.exports = {
     addCsrfToken,
@@ -610,5 +607,5 @@ module.exports = {
     processAuthCallback,
     registerLocalUser,
     updateLocalUser,
-    authMiddleWare
+
 }

@@ -78,46 +78,53 @@ app.use(fileUpload({
   safeFileNames: true
 }));
 
-app.get("/editConfig", auth.authMiddleWare, (req,res) => {
-    res.redirect('/public/edit_cgf.html');
+//ROUTES
+app.get("/editConfig", (req,res) => {
+  if (!req.session.accountId == 'Local_admin'){
+    console.log(req.session)
+    return res.sendStatus(401);
+  }
+  res.redirect('/public/edit_cfg.html');
 });
 
 app.post("/editConfig/upload", function (req, res) {
 
-  // When a file has been uploaded
-  if (req.files && Object.keys(req.files).length !== 0) {
+// When a file has been uploaded
+if (req.files && Object.keys(req.files).length !== 0) {
 
-    // Uploaded path
-    const uploadedFile = req.files.uploadFile;
+  // Uploaded path
+  const uploadedFile = req.files.uploadFile;
+  uploadedFile.name="config.json"
+  // Logging uploading file
+  console.log(uploadedFile);
 
-    // Logging uploading file
-    console.log(uploadedFile);
+  // Upload path
+  const uploadPath = __dirname +"/"+ uploadedFile.name;
 
-    // Upload path
-    const uploadPath = __dirname
-        + "/uploads/" + uploadedFile.name;
+  // To save the file using mv() function
+  fs.writeFileSync(uploadPath, uploadedFile.data, 'utf8');
+  config = util.getConfig();
+  uploadedFile.mv(uploadPath, function (err) {
+    if (err) {
+      console.log(err);
+      res.send("Failed !!");
+    } else res.send("Successfully Uploaded !!");
 
-    // To save the file using mv() function
-    uploadedFile.mv(uploadPath, function (err) {
-      if (err) {
-        console.log(err);
-        res.send("Failed !!");
-      } else res.send("Successfully Uploaded !!");
-    });
-  } else res.send("No file uploaded !!");
+  });
+
+} else res.send("No file uploaded !!");
 });
 
 app.get("/editConfig/download", function (req, res) {
 
-  // The res.download() talking file path to be downloaded
-  res.download(__dirname + "/config.json", function (err) {
-    if (err) {
-      console.log(err);
-    }
-  });
+// The res.download() talking file path to be downloaded
+res.download(__dirname + "/config.json", function (err) {
+  if (err) {
+    console.log(err);
+  }
+});
 });
 
-//ROUTES
 
 app.get("/",(req,res) => {
     res.redirect('/public/index.html');

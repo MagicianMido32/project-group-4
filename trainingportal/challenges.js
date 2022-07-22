@@ -18,7 +18,7 @@ limitations under the License.
 const path = require('path');
 const fs = require('fs');
 const util = require(path.join(__dirname, 'util'));
-const config = util.getConfig();
+var config = util.getConfig();
 const db = require(path.join(__dirname, 'db'));
 const validator = require('validator');
 const crypto = require('crypto');
@@ -177,6 +177,8 @@ exports.getPermittedChallengesForUser = async (user, moduleId) => {
  * @param {Array} moduleIds The lesson module ids
  */
 exports.getChallengeDefinitionsForUser = async (user, moduleId) => {
+  config = util.getConfig();
+
     var returnChallenges = [];
     
     if(util.isNullOrUndefined(moduleId)) return [];    
@@ -185,7 +187,11 @@ exports.getChallengeDefinitionsForUser = async (user, moduleId) => {
     var modulePath = getModulePath(moduleId);
     var moduleDefinitions = getDefinifionsForModule(moduleId);
 
+    var lvlCounter=0;
     for(let level of moduleDefinitions){
+        if(lvlCounter>=parseInt(config.untilBelt))
+            break;
+        lvlCounter++;
         for(let challenge of level.challenges) {
             //update the play link if it exists
             if (!util.isNullOrUndefined(config.playLinks)) {
@@ -206,14 +212,22 @@ exports.getChallengeDefinitionsForUser = async (user, moduleId) => {
 }
 
 
-
 /**
  * Returns the solution html (converted from markdown)
  * @param {The challenge id} challengeId 
  */
 exports.getSolution = function (challengeId) {
+    config = util.getConfig();
+
+    console.log(challengeId);
+    let disabled = config.disabledSolutions;
+    if(disabled.includes(challengeId)){
+        return "You're Not allowed to view this solution";
+    }
+   
     var solution = solutions[challengeId];
     var solutionHtml = "";
+
     if(!util.isNullOrUndefined(solution)){
         var solutionMarkDown = fs.readFileSync(path.join(__dirname, solution),'utf8');
         solutionHtml = util.parseMarkdown(solutionMarkDown);
