@@ -103,12 +103,17 @@ if (req.files && Object.keys(req.files).length !== 0) {
 
   // To save the file using mv() function
   fs.writeFileSync(uploadPath, uploadedFile.data, 'utf8');
-  config = util.getConfig();
+  //config = util.getConfig();
+  
   uploadedFile.mv(uploadPath, function (err) {
     if (err) {
       console.log(err);
       res.send("Failed !!");
-    } else res.send("Successfully Uploaded !!");
+    } else {
+      delete require.cache[require.resolve('./config.json')]   // Deleting loaded module
+      config = require("./config.json");
+  res.send("Successfully Uploaded !!");
+    } 
 
   });
 

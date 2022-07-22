@@ -9,7 +9,7 @@
     
     "disabledSolutions":["cwe807"],
 
-    "untilBelt":"4",
+    "untilBelt":"1",
     "playLinks" : {},
 
     "localUsersPath" : "localUsers.json"

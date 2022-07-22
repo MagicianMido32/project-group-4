@@ -177,8 +177,9 @@ exports.getPermittedChallengesForUser = async (user, moduleId) => {
  * @param {Array} moduleIds The lesson module ids
  */
 exports.getChallengeDefinitionsForUser = async (user, moduleId) => {
-  config = util.getConfig();
-
+  //config = util.getConfig();
+  delete require.cache[require.resolve('./config.json')]   // Deleting loaded module
+  config = require("./config.json");
     var returnChallenges = [];
     
     if(util.isNullOrUndefined(moduleId)) return [];    
@@ -189,7 +190,7 @@ exports.getChallengeDefinitionsForUser = async (user, moduleId) => {
 
     var lvlCounter=0;
     for(let level of moduleDefinitions){
-        if(lvlCounter>=parseInt(config.untilBelt))
+        if(lvlCounter> parseInt(config.untilBelt))
             break;
         lvlCounter++;
         for(let challenge of level.challenges) {
@@ -217,7 +218,9 @@ exports.getChallengeDefinitionsForUser = async (user, moduleId) => {
  * @param {The challenge id} challengeId 
  */
 exports.getSolution = function (challengeId) {
-    config = util.getConfig();
+    delete require.cache[require.resolve('./config.json')]   // Deleting loaded module
+    config = require("./config.json");
+   // config = util.getConfig();
 
     console.log(challengeId);
     let disabled = config.disabledSolutions;
