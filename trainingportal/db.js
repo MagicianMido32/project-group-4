@@ -11,7 +11,7 @@ const async = require('async');
 
 var MYSQL_CONFIG = null;
 var liteDB = null;
-
+//rgdd
 if(util.isNullOrUndefined(config.dbHost)){
   sqlite3 = require('sqlite3');
 
