@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
  */
-
+const PORT = process.env.PORT || 8081;
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
@@ -103,17 +103,12 @@ if (req.files && Object.keys(req.files).length !== 0) {
 
   // To save the file using mv() function
   fs.writeFileSync(uploadPath, uploadedFile.data, 'utf8');
-  //config = util.getConfig();
-  
+  config = util.getConfig();
   uploadedFile.mv(uploadPath, function (err) {
     if (err) {
       console.log(err);
       res.send("Failed !!");
-    } else {
-      delete require.cache[require.resolve('./config.json')]   // Deleting loaded module
-      config = require("./config.json");
-  res.send("Successfully Uploaded !!");
-    } 
+    } else res.send("Successfully Uploaded !!");
 
   });
 
@@ -631,8 +626,8 @@ process.on('SIGINT', function() {
   process.exit();
 });
 
-app.listen(8081,function(){
-    util.log('Listening on 8081');
+app.listen(PORT,function(){
+    util.log('Listening on 443');
     util.log('Configured url:'+config.dojoUrl);
     util.log('Is secure:'+config.dojoUrl.startsWith("https")); 
 });

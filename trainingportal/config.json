@@ -1,7 +1,7 @@
 {
-    "dojoUrl" : "http://localhost:8081",
+    "dojoUrl" : "http://localhost:443",
     "moduleUrls" : {
-        "blackBelt":"http://localhost:8080",
+        "blackBelt":"http://localhost:443",
         "securityCodeReviewMaster":"https://owasp.org/SecureCodingDojo/codereview101/?fromPortal"
     },
 
@@ -9,7 +9,7 @@
     
     "disabledSolutions":["cwe807"],
 
-    "untilBelt":"1",
+    "untilBelt":"4",
     "playLinks" : {},
 
     "localUsersPath" : "localUsers.json"
