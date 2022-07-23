@@ -8,7 +8,7 @@ Reliability
 file="public/authFail.html"
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 
 ### why is this an issue ? 
 
@@ -26,7 +26,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Noncompliant Code Example**
 
 <!DOCTYPE html>
-<html> <!-- Noncompliant -->
+<html lang="en" xml:lang="en"> <!-- Noncompliant -->
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -41,7 +41,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Compliant Solution**
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:lang="en">
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -80,7 +80,7 @@ Both the lang and the xml:lang attributes can take only one value.
 path=file("public/index.html")
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 
 ### why is this an issue ? 
 
@@ -98,7 +98,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Noncompliant Code Example**
 
 <!DOCTYPE html>
-<html> <!-- Noncompliant -->
+<html lang="en" xml:lang="en"> <!-- Noncompliant -->
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -113,7 +113,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Compliant Solution**
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:lang="en">
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -163,7 +163,7 @@ path=file("public/index.html")
 
 The <strong>/<b> and <em>/<i> tags have exactly the same effect in most web browsers, but there is a fundamental difference between them: <strong> and <em> have a semantic meaning whereas <b> and <i> only convey styling information like CSS.
 
-While <b> can have simply no effect on a some devices with limited display or when a screen reader software is used by a blind person, <strong> will:
+While <strong> can have simply no effect on a some devices with limited display or when a screen reader software is used by a blind person, <strong> will:
 
     Display the text bold in normal browsers
     Speak with lower tone when using a screen reader such as Jaws
@@ -177,7 +177,7 @@ Consequently:
 **Noncompliant Code Example**
 ```
 <i>car</i>             <!-- Noncompliant -->
-<b>train</b>         <!-- Noncompliant -->
+<strong>train</b>         <!-- Noncompliant -->
 
 ```
 
@@ -204,7 +204,7 @@ This rule is relaxed in case of icon fonts usage.
 path=file("public/ldaplogin.html")
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 
 ### why is this an issue ? 
 
@@ -222,7 +222,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Noncompliant Code Example**
 ```
 <!DOCTYPE html>
-<html> <!-- Noncompliant -->
+<html lang="en" xml:lang="en"> <!-- Noncompliant -->
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -238,7 +238,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Compliant Solution**
 ```
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:lang="en">
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -279,7 +279,7 @@ Both the lang and the xml:lang attributes can take only one value.
 path=file("public/locallogin.html")
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
 
 ### why is this an issue ? 
 
@@ -297,7 +297,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Noncompliant Code Example**
 ```
 <!DOCTYPE html>
-<html> <!-- Noncompliant -->
+<html lang="en" xml:lang="en"> <!-- Noncompliant -->
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
@@ -313,7 +313,7 @@ Both the lang and the xml:lang attributes can take only one value.
 **Compliant Solution**
 ```
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:lang="en">
     <head>
           <title>A page written in english</title>
           <meta content="text/html; charset=utf-8" />
